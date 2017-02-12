@@ -22,7 +22,7 @@ export default function user(state = initialState, action) {
         case SAVE_EMPLOYEE_REQUEST:
             return { ...state, fetching: true };
         case SAVE_EMPLOYEE_SUCCESS:
-            return { ...state, employees: [...action.employees, action.data], fetching: false };
+            return { ...state, employees: [...state.employees, action.data], fetching: false };
         case SAVE_EMPLOYEE_FAIL:
             return { ...state, error: action.error, fetching: false };
         case UPDATE_EMPLOYEE_REQUEST:

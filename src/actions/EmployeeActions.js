@@ -37,7 +37,10 @@ export function saveEmployee(employee) {
             }
             dispatch({
                 type: SAVE_EMPLOYEE_SUCCESS,
-                data: data.employee
+                data: {
+                    ...data.employee,
+                    skills: data.employee.skills.split(',')
+                }
             });
         }).fail(function (jqXHR, textStatus) {
             console.error(textStatus);
@@ -105,7 +108,12 @@ export function getEmployees() {
             }
             dispatch({
                 type: GET_EMPLOYEES_SUCCESS,
-                employees: data.employees
+                employees: data.employees.map((employee) => {
+                    return {
+                        ...employee,
+                        skills: employee.skills.split(',')
+                    };
+                })
             });
         }).fail(function (jqXHR, textStatus) {
             console.error(textStatus);

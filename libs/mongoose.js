@@ -24,6 +24,10 @@ const Manager = new Schema({
         type: String,
         required: true
     },
+    firstDay: {
+        type: Date,
+        default: Date.now
+    },
     created: {
         type: Date,
         default: Date.now
