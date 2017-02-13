@@ -114,6 +114,7 @@ export default class List extends Component {
 
     getTableRows = () => {
         let rows = this.state.employees.map((employee, index) => {
+            console.log(employee.firstDay)
             return (
                 <tr key={'row' + index}>
                     <td>{++index}</td>

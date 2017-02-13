@@ -108,9 +108,7 @@ app.post("/signin", function(req, res) {
 });
 
 app.post('/employee/save', passport.authenticate('jwt', { session: false }), function(req, res){
-    console.log('----req.body----', req.body);
     const employeeModel = new EmployeeModel(req.body);
-    console.log('----employeeModel----', employeeModel);
     employeeModel.save(function (err) {
         if (!err) {
             console.info('employeeModel created');
@@ -123,7 +121,6 @@ app.post('/employee/save', passport.authenticate('jwt', { session: false }), fun
 });
 
 app.put('/employee/update', passport.authenticate('jwt', { session: false }), function(req, res){
-    console.log('----update--req.body----', req.body);
     const employeeModel = new EmployeeModel(req.body);
     const upsertData = employeeModel.toObject();
     delete upsertData._id;

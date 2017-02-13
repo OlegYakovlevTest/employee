@@ -44,7 +44,7 @@ export default class Profile extends Component {
         return (
             <EmployeeForm
                 employee={this.props.employee}
-                handlerSave={this.props.updateEmployee}
+                handlerSave={this.handlerSave}
             />
         );
     };
@@ -60,6 +60,10 @@ export default class Profile extends Component {
                 <Row className='show-grid'>
                     <Col md={2}>Position:</Col>
                     <Col md={10}>{employee.position}</Col>
+                </Row>
+                <Row className='show-grid'>
+                    <Col md={2}>First day:</Col>
+                    <Col md={10}>{employee.firstDay ? employee.firstDay.format('DD.MM.YYYY') : 'Date is not selected'}</Col>
                 </Row>
                 {this.renderSkills(employee)}
             </Grid>
@@ -79,6 +83,13 @@ export default class Profile extends Component {
                 </Row>
             }
         });
+    };
+
+    handlerSave = (employee) => {
+        this.setState({
+            isEditing: false
+        });
+        this.props.updateEmployee(employee);
     };
 
     onEditClick = () => {

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+var moment = require('moment');
 
 import {
     SAVE_EMPLOYEE_REQUEST,
@@ -13,7 +14,7 @@ import {
     SET_EMPLOYEE
 } from '../constants/Employee';
 
-export function saveEmployee(employee) {
+export function saveEmployee(employee, photo) {
 
     return (dispatch) => {
         dispatch({
@@ -30,6 +31,7 @@ export function saveEmployee(employee) {
             data: JSON.stringify(employee)
         }).done(function (data, textStatus, jqXHR) {
             console.log('SAVE_EMPLOYEE_SUCCESS', data);
+            console.log('SAVE_EMPLOYEE_SUCCESS', new moment(data.employee.firstDay));
             if (!data) {
                 console.error('Looks like there was a problem. Status Code: ' +
                     jqXHR.status);
@@ -39,6 +41,7 @@ export function saveEmployee(employee) {
                 type: SAVE_EMPLOYEE_SUCCESS,
                 data: {
                     ...data.employee,
+                    firstDay: new moment(data.employee.firstDay),
                     skills: data.employee.skills.split(',')
                 }
             });
@@ -101,6 +104,7 @@ export function getEmployees() {
                 'Content-Type': 'application/json'
             }
         }).done(function (data, textStatus, jqXHR) {
+            console.log('GET_EMPLOYEES_SUCCESS', data);
             if (!data) {
                 console.error('Looks like there was a problem. Status Code: ' +
                     jqXHR.status);
@@ -111,6 +115,7 @@ export function getEmployees() {
                 employees: data.employees.map((employee) => {
                     return {
                         ...employee,
+                        firstDay: employee.firstDay ? new moment(employee.firstDay) : null,
                         skills: employee.skills.split(',')
                     };
                 })

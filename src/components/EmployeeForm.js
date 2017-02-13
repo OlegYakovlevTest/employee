@@ -3,9 +3,13 @@ import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-b
 import 'react-date-picker/index.css';
 // import { DateField, Calendar } from 'react-date-picker';
 import DatePicker from 'react-datepicker';
+// import Dropzone from 'react-dropzone';
+import './EmployeeForm.css';
 // import moment from 'moment';
 require('react-datepicker/dist/react-datepicker.css');
 var moment = require('moment');
+import ImagePreview from 'react-image-preview';
+require('moment');
 
 export default class EmployeeForm extends Component {
     constructor(props) {
@@ -15,18 +19,36 @@ export default class EmployeeForm extends Component {
 
     render() {
         console.log('EditEmployeeForm', this.props, this.state);
-        // let date = '2017-04-24';
         return (
             <div>
                 <Form horizontal>
-                    <FormGroup controlId='formHorizontalEmail'>
-                        <Col componentClass={ControlLabel} sm={2}>
-                            File
-                        </Col>
-                        <Col sm={10}>
-                            <FormControl type='file' placeholder='Select file' onChange={this.onFileChange}/>
-                        </Col>
-                    </FormGroup>
+                    {/*<FormGroup controlId='formHorizontalEmail'>*/}
+                        {/*<Col componentClass={ControlLabel} sm={2}>*/}
+                            {/*File*/}
+                        {/*</Col>*/}
+                        {/*<Col sm={10}>*/}
+                            {/*<FormControl type='file' placeholder='Select file' onChange={this.onInputFileChange}/>*/}
+                        {/*</Col>*/}
+                    {/*</FormGroup>*/}
+                    {/*<FormGroup controlId='formHorizontalEmail'>*/}
+                        {/*<Col componentClass={ControlLabel} sm={2}>*/}
+                            {/*File*/}
+                        {/*</Col>*/}
+                        {/*<Col sm={10}>*/}
+                            {/*<Dropzone onDrop={this.onDrop}>*/}
+                                {/*<div>Try dropping some files here, or click to select files to upload.</div>*/}
+                            {/*</Dropzone>*/}
+                        {/*</Col>*/}
+                    {/*</FormGroup>*/}
+                    {/*<FormGroup controlId='formHorizontalEmail'>*/}
+                        {/*<Col componentClass={ControlLabel} sm={2}>*/}
+                            {/*File*/}
+                        {/*</Col>*/}
+                        {/*<Col sm={10}>*/}
+                                {/*<p>Please add your images below:</p>*/}
+                                {/*<ImagePreview  onChange={this.onFileChange}/>*/}
+                        {/*</Col>*/}
+                    {/*</FormGroup>*/}
                     <FormGroup controlId='formHorizontalEmail'>
                         <Col componentClass={ControlLabel} sm={2}>
                             First name
@@ -80,11 +102,11 @@ export default class EmployeeForm extends Component {
                             First day
                         </Col>
                         <Col sm={10}>
+                            {/*<DatePicker*/}
+                                {/*selected={this.state.employee.firstDay}*/}
+                                {/*onChange={this.onDateChange} />*/}
                             <DatePicker
                                 selected={this.state.employee.firstDay}
-                                onChange={this.onDateChange} />
-                            <DatePicker
-                                selected={this.state.startDate}
                                 onChange={this.onDateChange}
                                 withPortal/>
                             {/*<DateField*/}
@@ -135,8 +157,10 @@ export default class EmployeeForm extends Component {
                 mname: '',
                 position: '',
                 skills: [''],
-                firstDay: null
-            }
+                firstDay: null,
+                photoLink: ''
+            },
+            photo: null
         };
     };
 
@@ -177,19 +201,21 @@ export default class EmployeeForm extends Component {
             })
     };
 
-    onDateChange = (dateString, { dateMoment, timestamp }) => {
+    onDrop = (acceptedFiles, rejectedFiles) => {
+        console.log('Accepted files: ', acceptedFiles);
+        console.log('Rejected files: ', rejectedFiles);
+    }
+
+    onDateChange = (momentDate) => {
         this.setState(
             {
                 ...this.state,
                 employee: {
                     ...this.state.employee,
-                    firstDay: dateString
+                    firstDay: momentDate
                 }
             }
         );
-        console.log(dateString);
-        console.log(dateMoment);
-        console.log(timestamp);
     };
 
     onAddSkillClick = () => {
@@ -216,8 +242,16 @@ export default class EmployeeForm extends Component {
         )
     };
 
-    onFileChange = (e) => {
-        console.log(e);
+    onInputFileChange = function() {
+        console.log('onInputFileChange');
+        console.log(arguments);
+    };
+
+    onFileChange = (photo) => {
+        console.log(photo);
+        this.setState({
+            photo: photo[0]
+        })
     };
 
     onFnameChange = (e) => {
@@ -277,7 +311,7 @@ export default class EmployeeForm extends Component {
     };
 
     onSaveClick = () => {
-        this.props.handlerSave(this.state.employee);
+        this.props.handlerSave(this.state.employee, this.state.photo);
         this.setState(this.getDefaultState());
     };
 }

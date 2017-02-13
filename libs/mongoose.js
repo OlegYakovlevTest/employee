@@ -62,6 +62,10 @@ const Employee = new Schema({
         type: String,
         required: true
     },
+    firstDay: {
+        type: Date,
+        default: null
+    },
     created: {
         type: Date,
         default: Date.now
