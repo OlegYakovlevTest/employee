@@ -45,9 +45,9 @@ export default class Authorization extends Component {
                         <Button type='button' onClick={this.signIn} disabled={this.state.isBtnDisabled}>
                             Sign in
                         </Button>
-                        <Button type='button' onClick={this.signUp} disabled={this.state.isBtnDisabled}>
-                            Sign up
-                        </Button>
+                        {/*<Button type='button' onClick={this.signUp} disabled={this.state.isBtnDisabled}>*/}
+                            {/*Sign up*/}
+                        {/*</Button>*/}
                     </Col>
                 </FormGroup>
             </Form>
@@ -57,12 +57,12 @@ export default class Authorization extends Component {
     onLoginChange = (event) => {
         this.login = event.target.value;
         this.validate();
-    }
+    };
 
     onPasswordChange = (event) => {
         this.password = event.target.value;
         this.validate();
-    }
+    };
 
     validate = () => {
         if (this.state.isBtnDisabled && this.login.length > 3 && this.password.length > 3) {
@@ -70,7 +70,7 @@ export default class Authorization extends Component {
         } else if (!this.state.isBtnDisabled && (this.login.length <= 3 || this.password.length <= 3)) {
             this.setState({isBtnDisabled: false});
         }
-    }
+    };
 
     signIn = () => {
         console.log(this.props);
@@ -79,7 +79,7 @@ export default class Authorization extends Component {
             password: this.password
         };
         this.props.signIn(data);
-    }
+    };
 
     signUp = () => {
         const data = {
@@ -87,5 +87,5 @@ export default class Authorization extends Component {
             password: this.password
         };
         this.props.signUp(data);
-    }
+    };
 }

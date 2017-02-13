@@ -3,10 +3,6 @@ import { PageHeader, Table, FormGroup, ControlLabel, FormControl } from 'react-b
 import { connect } from 'react-redux';
 import { getEmployees, setEmployee } from '../actions/EmployeeActions';
 import { Link } from 'react-router';
-// import FilterSelect from './FilterSelect';
-
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 @connect(state => ({
     manager: state.manager,
@@ -24,19 +20,9 @@ export default class List extends Component {
     }
 
     render() {
-        console.log('-----List---', this.props);
-        var options = [
-            { value: 'one', label: 'One' },
-            { value: 'two', label: 'Two' }
-        ];
         return (
             <div>
                 <PageHeader>List page</PageHeader>
-                <Select
-                    options={options}
-                    onChange={this.logChange}
-                    simpleValue={true}
-                />
                 <FormGroup
                     controlId='formBasicText'
                 >
@@ -54,7 +40,7 @@ export default class List extends Component {
                             <th>#</th>
                             <th>Name</th>
                             <th>Position</th>
-                            <th>Created</th>
+                            <th>First day</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,10 +49,6 @@ export default class List extends Component {
                 </Table>
             </div>
         );
-    }
-
-    logChange = (val) => {
-        console.log('Selected:', val);
     }
 
     componentDidMount() {
@@ -82,7 +64,6 @@ export default class List extends Component {
     }
 
     onFilterChange = (e) => {
-        console.log('---onFilterChange--', e.target.value);
         this.setState({
             filter: e.target.value
         });
@@ -96,17 +77,9 @@ export default class List extends Component {
                 employees: this.props.employee.employees
             });
         }
-        // const employees = this.props.employee.employees.map((el) => {
-        //     const employeeString = JSON.stringify(el).toLowerCase();
-        //     if ( new RegExp(text.toLowerCase()).test(employeeString) ) {
-        //         console.log('employeeString', employeeString);
-        //         return el;
-        //     }
-        // });
         const employees = this.props.employee.employees.filter((el) => {
             return new RegExp(text.toLowerCase()).test(JSON.stringify(el).toLowerCase());
         });
-        console.log(employees);
         this.setState({
             employees
         });
@@ -126,7 +99,7 @@ export default class List extends Component {
                         </Link>
                     </td>
                     <td>{employee.position}</td>
-                    <td>{employee.created}</td>
+                    <td>{employee.firstDay ? employee.firstDay.format('DD.MM.YYYY') : 'Date is not selected'}</td>
                 </tr>
             );
         });

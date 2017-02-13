@@ -1,15 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import 'react-date-picker/index.css';
 import DatePicker from 'react-datepicker';
 import './EmployeeForm.css';
 require('react-datepicker/dist/react-datepicker.css');
-var moment = require('moment');
 require('moment');
+// const moment = require('moment');
 // import Dropzone from 'react-dropzone';
 // import ImagePreview from 'react-image-preview';
-// import moment from 'moment';
-// import { DateField, Calendar } from 'react-date-picker';
 
 export default class EmployeeForm extends Component {
     constructor(props) {
@@ -102,25 +100,10 @@ export default class EmployeeForm extends Component {
                             First day
                         </Col>
                         <Col sm={10}>
-                            {/*<DatePicker*/}
-                                {/*selected={this.state.employee.firstDay}*/}
-                                {/*onChange={this.onDateChange} />*/}
                             <DatePicker
                                 selected={this.state.employee.firstDay}
                                 onChange={this.onDateChange}
                                 withPortal/>
-                            {/*<DateField*/}
-                                {/*defaultValue={'2016-05-30'}*/}
-                                {/*dateFormat='YYYY-MM-DD'*/}
-                            {/*/>*/}
-                            {/*<DateField*/}
-                                {/*dateFormat='YYYY-MM-DD'*/}
-                            {/*/>*/}
-                            {/*<Calendar*/}
-                                {/*dateFormat='YYYY-MM-DD'*/}
-                                {/*date={date}*/}
-                                {/*onChange={this.onDateChange}*/}
-                            {/*/>*/}
                         </Col>
                     </FormGroup>
                     { this.renderSkills() }
@@ -203,7 +186,7 @@ export default class EmployeeForm extends Component {
     onDrop = (acceptedFiles, rejectedFiles) => {
         console.log('Accepted files: ', acceptedFiles);
         console.log('Rejected files: ', rejectedFiles);
-    }
+    };
 
     onDateChange = (momentDate) => {
         this.setState(
