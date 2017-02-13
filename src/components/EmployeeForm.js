@@ -5,6 +5,7 @@ import 'react-date-picker/index.css';
 import DatePicker from 'react-datepicker';
 // import moment from 'moment';
 require('react-datepicker/dist/react-datepicker.css');
+var moment = require('moment');
 
 export default class EmployeeForm extends Component {
     constructor(props) {
@@ -80,7 +81,7 @@ export default class EmployeeForm extends Component {
                         </Col>
                         <Col sm={10}>
                             <DatePicker
-                                selected={this.state.startDate}
+                                selected={this.state.employee.firstDay}
                                 onChange={this.onDateChange} />
                             <DatePicker
                                 selected={this.state.startDate}
@@ -133,7 +134,8 @@ export default class EmployeeForm extends Component {
                 lname: '',
                 mname: '',
                 position: '',
-                skills: ['']
+                skills: [''],
+                firstDay: null
             }
         };
     };
@@ -176,6 +178,15 @@ export default class EmployeeForm extends Component {
     };
 
     onDateChange = (dateString, { dateMoment, timestamp }) => {
+        this.setState(
+            {
+                ...this.state,
+                employee: {
+                    ...this.state.employee,
+                    firstDay: dateString
+                }
+            }
+        );
         console.log(dateString);
         console.log(dateMoment);
         console.log(timestamp);
