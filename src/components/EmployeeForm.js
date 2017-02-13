@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import { Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import 'react-date-picker/index.css';
-// import { DateField, Calendar } from 'react-date-picker';
 import DatePicker from 'react-datepicker';
-// import Dropzone from 'react-dropzone';
 import './EmployeeForm.css';
-// import moment from 'moment';
 require('react-datepicker/dist/react-datepicker.css');
 var moment = require('moment');
-import ImagePreview from 'react-image-preview';
 require('moment');
+// import Dropzone from 'react-dropzone';
+// import ImagePreview from 'react-image-preview';
+// import moment from 'moment';
+// import { DateField, Calendar } from 'react-date-picker';
 
 export default class EmployeeForm extends Component {
     constructor(props) {
@@ -144,7 +144,6 @@ export default class EmployeeForm extends Component {
     }
 
     getDefaultState = () => {
-        console.log(this.props.employee);
         if (this.props.employee) {
             return {
                 employee: {...this.props.employee}

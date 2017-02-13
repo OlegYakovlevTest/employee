@@ -12,7 +12,7 @@ const config = require('./libs/config');
 
 const app = new express();
 const compiler = webpack(webpackConfig);
-const port = config.get('port');
+const port = process.env.PORT || config.get('port');
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
