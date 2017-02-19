@@ -1,3 +1,8 @@
 .react-datepicker {
     font-size: 1.5rem !important;
 }
+
+.photo {
+    width: 200px;
+    height: 200px;
+}

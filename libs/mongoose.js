@@ -66,6 +66,10 @@ const Employee = new Schema({
         type: Date,
         default: null
     },
+    photo: {
+        type: String,
+        default: null
+    },
     created: {
         type: Date,
         default: Date.now

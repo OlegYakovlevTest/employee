@@ -5,8 +5,7 @@ import DatePicker from 'react-datepicker';
 import './EmployeeForm.css';
 require('react-datepicker/dist/react-datepicker.css');
 require('moment');
-// const moment = require('moment');
-// import Dropzone from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 // import ImagePreview from 'react-image-preview';
 
 export default class EmployeeForm extends Component {
@@ -20,33 +19,20 @@ export default class EmployeeForm extends Component {
         return (
             <div>
                 <Form horizontal>
-                    {/*<FormGroup controlId='formHorizontalEmail'>*/}
-                        {/*<Col componentClass={ControlLabel} sm={2}>*/}
-                            {/*File*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={10}>*/}
-                            {/*<FormControl type='file' placeholder='Select file' onChange={this.onInputFileChange}/>*/}
-                        {/*</Col>*/}
-                    {/*</FormGroup>*/}
-                    {/*<FormGroup controlId='formHorizontalEmail'>*/}
-                        {/*<Col componentClass={ControlLabel} sm={2}>*/}
-                            {/*File*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={10}>*/}
-                            {/*<Dropzone onDrop={this.onDrop}>*/}
-                                {/*<div>Try dropping some files here, or click to select files to upload.</div>*/}
-                            {/*</Dropzone>*/}
-                        {/*</Col>*/}
-                    {/*</FormGroup>*/}
-                    {/*<FormGroup controlId='formHorizontalEmail'>*/}
-                        {/*<Col componentClass={ControlLabel} sm={2}>*/}
-                            {/*File*/}
-                        {/*</Col>*/}
-                        {/*<Col sm={10}>*/}
-                                {/*<p>Please add your images below:</p>*/}
-                                {/*<ImagePreview  onChange={this.onFileChange}/>*/}
-                        {/*</Col>*/}
-                    {/*</FormGroup>*/}
+                    <FormGroup controlId='formHorizontalEmail'>
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Photo
+                        </Col>
+                        <Col sm={10}>
+                            <Dropzone onDrop={this.onDrop}>
+                                {
+                                    this.state.employee.photo ?
+                                        <img className='photo' src={'data:image/*;base64,' + this.state.employee.photo}/> :
+                                        <div>Try dropping some files here, or click to select files to upload.</div>
+                                }
+                            </Dropzone>
+                        </Col>
+                    </FormGroup>
                     <FormGroup controlId='formHorizontalEmail'>
                         <Col componentClass={ControlLabel} sm={2}>
                             First name
@@ -140,7 +126,7 @@ export default class EmployeeForm extends Component {
                 position: '',
                 skills: [''],
                 firstDay: null,
-                photoLink: ''
+                photo: ''
             },
             photo: null
         };
@@ -186,6 +172,27 @@ export default class EmployeeForm extends Component {
     onDrop = (acceptedFiles, rejectedFiles) => {
         console.log('Accepted files: ', acceptedFiles);
         console.log('Rejected files: ', rejectedFiles);
+        let photo = {};
+        const readerOnload = (e) => {
+            const base64 = btoa(e.target.result);
+            photo.base64 = base64;
+            this.setState({
+                ...this.state,
+                employee: {
+                    ...this.state.employee,
+                    photo: base64
+                }
+            });
+        };
+
+        let reader = new FileReader();
+        reader.onload = readerOnload;
+
+        const file = acceptedFiles[0];
+        photo.filetype = file.type;
+        photo.size = file.size;
+        photo.filename = file.name;
+        reader.readAsBinaryString(file);
     };
 
     onDateChange = (momentDate) => {
@@ -222,18 +229,6 @@ export default class EmployeeForm extends Component {
                 }
             }
         )
-    };
-
-    onInputFileChange = function() {
-        console.log('onInputFileChange');
-        console.log(arguments);
-    };
-
-    onFileChange = (photo) => {
-        console.log(photo);
-        this.setState({
-            photo: photo[0]
-        })
     };
 
     onFnameChange = (e) => {

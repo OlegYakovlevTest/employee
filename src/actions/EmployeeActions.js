@@ -1,4 +1,5 @@
 import $ from 'jquery';
+// import request from 'superagent';
 var moment = require('moment');
 
 import {
@@ -13,6 +14,47 @@ import {
     GET_EMPLOYEES_FAIL,
     SET_EMPLOYEE
 } from '../constants/Employee';
+
+
+// export const saveEmployee = (employee, photo) => dispatch => {
+//     console.log(employee);
+//
+//     dispatch({
+//         type: SAVE_EMPLOYEE_REQUEST
+//     });
+//
+//     return new Promise((resolve, reject) => request.post(`/employee/save`)
+//         .send(employee)
+//         .end((err, data) => {
+//             if (err) {
+//                 err = err.message ? err.message : null;
+//
+//                 dispatch({
+//                     type: SAVE_EMPLOYEE_FAIL
+//                 });
+//
+//                 reject(err);
+//             } else {
+//                 console.log('-------data-----', data)
+//                 dispatch({
+//                     type: SAVE_EMPLOYEE_SUCCESS,
+//                     data: {
+//                         ...data.employee,
+//                         firstDay: new moment(data.employee.firstDay),
+//                         skills: data.employee.skills.split(',')
+//                     }
+//                 });
+                // data = JSON.parse(data.text);
+                //
+                // dispatch({
+                //     type: USERPHOTO_EDIT_SUCCESS,
+                //     avatar: ( data && data.avatar.url ) || null
+                // });
+//
+//                 resolve(data);
+//             }
+//         }));
+// };
 
 export function saveEmployee(employee, photo) {
 

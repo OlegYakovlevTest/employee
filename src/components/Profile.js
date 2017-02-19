@@ -54,18 +54,30 @@ export default class Profile extends Component {
         return (
             <Grid>
                 <Row className='show-grid'>
-                    <Col md={2}>Name:</Col>
-                    <Col md={10}>{`${employee.lname} ${employee.fname} ${employee.mname}`}</Col>
+                    <Col md={4}>
+                        {
+
+                            employee.photo ?
+                                <img className='photo' src={'data:image/*;base64,' + this.state.employee.photo}/> :
+                                <div className='no-photo'>No photo selected.</div>
+                        }
+                    </Col>
+                    <Col md={8}>
+                        <Row className='show-grid'>
+                            <Col md={2}>Name:</Col>
+                            <Col md={10}>{`${employee.lname} ${employee.fname} ${employee.mname}`}</Col>
+                        </Row>
+                        <Row className='show-grid'>
+                            <Col md={2}>Position:</Col>
+                            <Col md={10}>{employee.position}</Col>
+                        </Row>
+                        <Row className='show-grid'>
+                            <Col md={2}>First day:</Col>
+                            <Col md={10}>{employee.firstDay ? employee.firstDay.format('DD.MM.YYYY') : 'Date is not selected'}</Col>
+                        </Row>
+                        {this.renderSkills(employee)}
+                    </Col>
                 </Row>
-                <Row className='show-grid'>
-                    <Col md={2}>Position:</Col>
-                    <Col md={10}>{employee.position}</Col>
-                </Row>
-                <Row className='show-grid'>
-                    <Col md={2}>First day:</Col>
-                    <Col md={10}>{employee.firstDay ? employee.firstDay.format('DD.MM.YYYY') : 'Date is not selected'}</Col>
-                </Row>
-                {this.renderSkills(employee)}
             </Grid>
         );
     };

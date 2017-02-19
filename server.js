@@ -49,10 +49,8 @@ passport.deserializeUser(function(id, done) {
 app.use(passport.initialize());
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({limit: '5mb', extended: true}));
 
 app.listen(port, (error) => {
     if (error) {
