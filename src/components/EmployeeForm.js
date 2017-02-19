@@ -24,7 +24,11 @@ export default class EmployeeForm extends Component {
                             Photo
                         </Col>
                         <Col sm={10}>
-                            <Dropzone onDrop={this.onDrop}>
+                            <Dropzone
+                                onDrop={this.onDrop}
+                                multiple={false}
+                                accept='image/*'
+                                maxSize={2000000}>
                                 {
                                     this.state.employee.photo ?
                                         <img className='photo' src={'data:image/*;base64,' + this.state.employee.photo}/> :
