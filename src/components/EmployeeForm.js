@@ -41,7 +41,7 @@ export default class EmployeeForm extends Component {
                             <FormControl
                                 type='text'
                                 placeholder='First name'
-                                defaultValue={this.state.employee.fname}
+                                value={this.state.employee.fname}
                                 onChange={this.onFnameChange}/>
                         </Col>
                     </FormGroup>
@@ -53,7 +53,7 @@ export default class EmployeeForm extends Component {
                             <FormControl
                                 type='text'
                                 placeholder='Last name'
-                                defaultValue={this.state.employee.lname}
+                                value={this.state.employee.lname}
                                 onChange={this.onLnameChange}/>
                         </Col>
                     </FormGroup>
@@ -65,7 +65,7 @@ export default class EmployeeForm extends Component {
                             <FormControl
                                 type='text'
                                 placeholder='Middle name'
-                                defaultValue={this.state.employee.mname}
+                                value={this.state.employee.mname}
                                 onChange={this.onMnameChange}/>
                         </Col>
                     </FormGroup>
@@ -77,7 +77,7 @@ export default class EmployeeForm extends Component {
                             <FormControl
                                 type='text'
                                 placeholder='Position'
-                                defaultValue={this.state.employee.position}
+                                value={this.state.employee.position}
                                 onChange={this.onPositioChange}/>
                         </Col>
                     </FormGroup>
@@ -142,7 +142,7 @@ export default class EmployeeForm extends Component {
                     <FormControl
                         type='text'
                         placeholder='New skill'
-                        defaultValue={this.state.employee.skills[0]}
+                        value={this.state.employee.skills[0]}
                         onChange={(e) => {
                             this.onSkillsChange(e, 0)
                         }}/>
